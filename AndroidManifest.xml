@@ -3,8 +3,10 @@
     package="com.game.Taboo"
     android:versionCode="1"
     android:versionName="1.0" >
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    
 
-    <uses-sdk android:minSdkVersion="15" />
+    <uses-sdk android:minSdkVersion="8" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -21,6 +23,10 @@
          <activity 
             android:label="New Game" 
             android:name=".NewGame"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+          <activity 
+            android:label="Test Activity" 
+            android:name=".testActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" />
     </application>
 

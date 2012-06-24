@@ -15,7 +15,9 @@ public class TabooActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options));
+   //     setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options));
+    	 setListAdapter(new ArrayAdapter<String>(this, R.layout.main, android.R.id.text1, options));
+     	
     }
     
     @Override

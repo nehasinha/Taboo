@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <RelativeLayout
+	android:id="@+id/rel_layout"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+ 
+    
+
+<TextView
+	android:id="@+id/main"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="1"
+	android:layout_alignParentTop="true"
+	android:layout_toRightOf="@+id/correctbutton" />
+
+<TextView
+	android:id="@+id/word1"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="1"
+	android:layout_below="@+id/main"
+	android:layout_alignLeft="@+id/main" />
+
+<TextView
+	android:id="@+id/word2"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="2"
+	android:layout_below="@+id/word1"
+	android:layout_alignLeft="@+id/word1" />
+
+
+<TextView
+	android:id="@+id/word3"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="3"
+	android:layout_below="@+id/word2"
+	android:layout_alignLeft="@+id/word2" />
+
+<TextView
+	android:id="@+id/word4"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="4"
+	android:layout_below="@+id/word3"
+	android:layout_alignLeft="@+id/word3" />
+
+<TextView
+	android:id="@+id/word5"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="5"
+	android:layout_below="@+id/word4"
+	android:layout_alignLeft="@+id/word4" />
+
+
+<TextView
+	android:id="@+id/timer"
+	android:layout_width="150dp"
+	android:layout_height="32dp"
+	android:text="Time Remaining :"
+	android:layout_alignTop="@+id/correctbutton"
+	android:layout_alignLeft="@+id/incorrectbutton" />
+
+<Button
+	android:id="@+id/correctbutton"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Correct"
+	android:layout_alignParentBottom="true"
+	android:layout_alignParentLeft="true" />
+<Button
+	android:id="@+id/incorrectbutton"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Incorrect"
+	android:layout_alignParentBottom="true"
+	android:layout_alignParentRight="true" />
+
+</RelativeLayout> -->
+
+
+
+
+
+
+<LinearLayout
+	android:id="@+id/widget44"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/word0"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="main" />
+<TextView
+	android:id="@+id/word1"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="1" />
+<TextView
+	android:id="@+id/word2"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="2" />
+<TextView
+	android:id="@+id/word3"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="3" />
+<TextView
+	android:id="@+id/word4"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="4" />
+<TextView
+	android:id="@+id/word5"
+	android:layout_width="100dp"
+	android:layout_height="40dp"
+	android:text="5" />
+<TextView
+	android:id="@+id/timer"
+	android:layout_width="150dp"
+	android:layout_height="32dp"
+	android:layout_marginLeft="100dp"
+	android:layout_marginRight="100dp"
+	android:text="Time Remaining:" />
+<Button
+	android:id="@+id/correctbutton"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:onClick = "buttonClickHandler"
+	android:text="Correct" />
+<Button
+	android:id="@+id/incorrectbutton"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:onClick = "buttonClickHandler"
+	android:text="Incorrect" />
+</LinearLayout>
+

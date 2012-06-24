@@ -1,48 +1,40 @@
 package com.game.Taboo;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent; 
 import android.view.View;
 import android.view.View.OnTouchListener; 
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 
-public class NewGame extends Activity implements OnTouchListener{
-	StringBuilder builder = new StringBuilder();
-	TextView textView;
-
+public class NewGame extends ListActivity {
+	//StringBuilder builder = new StringBuilder();
+	TextView textView, text1;
+	String words[] = {"look", "see", "watch", "clothes", "eye","fashion" };
 
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	textView = new TextView(this);
-	textView.setText("Touch and drag (one finger only)!"); 
-	textView.setOnTouchListener(this); 
-	setContentView(textView);
-	}
-@Override
-public boolean onTouch(View v, MotionEvent event) {
-	builder.setLength(0);
-	switch (event.getAction()) { 
-	case MotionEvent.ACTION_DOWN:
-		builder.append("down, ");
-		break;
-	case MotionEvent.ACTION_MOVE:
-		builder.append("move, ");
-		break;
-	case MotionEvent.ACTION_CANCEL:
-		builder.append("cancel, ");
-		break;
-	case MotionEvent.ACTION_UP:
-		builder.append("up, ");
-		break; 
-	}
-	builder.append(event.getX()); 
-	builder.append(", "); 
-	builder.append(event.getY());
-	String text = builder.toString(); 
-	Log.d("TouchTest", text); 
-	textView.setText(text);
-	return true; 
+	setListAdapter(new ArrayAdapter<String>(this, R.layout.new_game, android.R.id.text1, words));
+	
+	
+	
+	System.out.println("inside new game");
+	System.out.println("Hello Neha SInha");
+	System.out.println("empty");
+	String testname = "testActivity";
+	try {
+		Class clazz = Class.forName("com.game.Taboo." + testname);
+		Intent intent = new Intent(this, clazz);
+		startActivity(intent);
+} catch (ClassNotFoundException e) {
+	e.printStackTrace(); 
+}
 	}
 }
