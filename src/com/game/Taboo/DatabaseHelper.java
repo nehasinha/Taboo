@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.game.Taboo.DatabaseHelper;
@@ -27,7 +29,7 @@ import android.widget.SimpleCursorAdapter;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-	
+	public static ArrayList<Integer> usedWords = new ArrayList<Integer>();
 	static final String dbName = "TabooDB";
 	static final String tableName="WordsTable";
 	static final String primaryKey="_id";
@@ -85,13 +87,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 	public Cursor retrieveData(){
-		int min, max;
-		SQLiteDatabase db = this.getReadableDatabase();  
-		min=1;
-		max=125;
+		int min = 1;
+		int max =125;
+		int randomNumber;
+		Random r;
+		SQLiteDatabase db = this.getReadableDatabase(); 
 		
-		Random r = new Random();
-		int randomNumber = r.nextInt(max - min + 1) + min;
+		while(true) {
+			r = new Random();
+			randomNumber = r.nextInt(max - min + 1) + min;
+			if(!usedWords.contains(randomNumber)){
+				break;
+			}	
+		}
+	
+	//	int randomNumber = r.nextInt(max - min + 1) + min;
 		System.out.println(randomNumber);
 	      
 	    Cursor cur = db.query("WordsTable", null, "_id in ("
@@ -99,9 +109,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    if(cur == null) {
 	    	System.out.println("Null cursor returned");
 	    }
-	      int rowsCount = cur.getCount();
-	      cur.moveToFirst();
-	   return cur;		
+	    cur.moveToFirst();
+	    int temp = Integer.parseInt(cur.getString(0));
+	    usedWords.add(temp);  
+	    System.out.println(usedWords);
+	    return cur;		
 	}
 	  
 	

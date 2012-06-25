@@ -1,8 +1,5 @@
 package com.game.Taboo;
 
-
-
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,11 +35,21 @@ public class testActivity extends Activity {
     	initialDatabaseSetup(dbhelper);
     
     	//display the retrieved data
-    	displayRetrievedData();  
+    	displayRetrievedData(); 
+    	
+    	try {Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+    	displayRetrievedData(); 
+    	
     	
     	//start the countdown timer
     	countDownTimer counter = new countDownTimer(5000,1000);
         counter.start();
+       
     	
     }
    
@@ -52,9 +59,11 @@ public class testActivity extends Activity {
     		switch(view.getId()) {
     		case R.id.correctbutton:
     			System.out.println("correct button");
+    			//write code to get team id and increment score	
     			break;
     		case R.id.incorrectbutton:	
     			System.out.println("incorrect button");
+    			//write code to get team id and increment score
     			break;
     		}
     	}
@@ -74,7 +83,7 @@ public class testActivity extends Activity {
 			csvStream = aMgr.open("cards.csv");
 			
 			reader = new BufferedReader(new InputStreamReader(csvStream));
-			int i=1;
+			
 			while ((line = reader.readLine()) != null) {   
 				line = line.replaceAll("\"", "");
 				inputString = line.split(",");
@@ -106,10 +115,7 @@ public class testActivity extends Activity {
  	
   	}
     
-    	
-    
-    
-    
+   
     public class countDownTimer extends CountDownTimer {
     	
 		TextView countdowntimer = (TextView) findViewById(R.id.timer);
