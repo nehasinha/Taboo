@@ -34,7 +34,7 @@ public void onCreate(Bundle savedInstanceState) {
 		Intent intent = new Intent(this, clazz);
 		startActivity(intent);
 } catch (ClassNotFoundException e) {
-	e.printStackTrace(); 
-}
+			e.printStackTrace();
+		}
 	}
 }

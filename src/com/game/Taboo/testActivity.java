@@ -3,9 +3,18 @@ package com.game.Taboo;
 
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -54,7 +63,29 @@ public class testActivity extends Activity {
   
   //inserting data into the table
     public void initialDatabaseSetup(DatabaseHelper dbhelper) {
-    	dbhelper.insertData();
+    	String line;
+    	BufferedReader reader;
+    	InputStream csvStream = null;
+    	String[] inputString;
+    	
+    	AssetManager aMgr = this.getAssets();
+    	
+		try {
+			csvStream = aMgr.open("cards.csv");
+			
+			reader = new BufferedReader(new InputStreamReader(csvStream));
+			int i=1;
+			while ((line = reader.readLine()) != null) {   
+				line = line.replaceAll("\"", "");
+				inputString = line.split(",");
+				dbhelper.insertData(inputString);
+			}
+		} catch (FileNotFoundException e) {
+			      e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
     }
     
   //display retrieved data
@@ -66,8 +97,6 @@ public class testActivity extends Activity {
     		cur.moveToFirst();
     	}
 	
-    	
-    	
     	for (int i = 0; i < 6; i++) {
             int resId = getResources().getIdentifier("word"+i, "id", getPackageName());
             TextView tv = (TextView)findViewById(resId);

@@ -4,10 +4,22 @@
 
 package com.game.Taboo;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+
 import com.game.Taboo.DatabaseHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -25,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	static final String col4="TabooWord3";
 	static final String col5="TabooWord4";
 	static final String col6="TabooWord5";
+	public static final String temp = null;
 	
 	public DatabaseHelper(Context context) {
 		super(context, dbName, null, 33);
@@ -46,84 +59,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    this.onCreate(db);  
 	}  
 	
-	public void insertData() {
-		System.out.println("Inside insert");
+	public void insertData(String[] inputString) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		
 		db.delete(DatabaseHelper.tableName, DatabaseHelper.col1+"=?", null);
-		System.out.println("Deleted db if exists");
-		
-		String[][] wordsList = new String[5][7];
-		
-		wordsList[0][0] = "OCEAN";
-		wordsList[0][1] = "sea";
-		wordsList[0][2] = "atlantic";
-		wordsList[0][3] = "pacific";
-		wordsList[0][4] = "salt water";
-		wordsList[0][5] = "beach";
-					
-		wordsList[1][0] = "OUT";
-		wordsList[1][1] = "go";
-		wordsList[1][2] = "leave";
-		wordsList[1][3] = "exit";
-		wordsList[1][4] = "in";
-		wordsList[1][5] = "door";
-		
-		wordsList[2][0] = "LOOK";
-		wordsList[2][1] = "see";
-		wordsList[2][2] = "eyes";
-		wordsList[2][3] = "clothes";
-		wordsList[2][4] = "fashion";
-		wordsList[2][5] = "watch";
-					
-		wordsList[3][0] = "MILK";
-		wordsList[3][1] = "cow";
-		wordsList[3][2] = "dairy";
-		wordsList[3][3] = "cereal";
-		wordsList[3][4] = "cookies";
-		wordsList[3][5] = "drink";
-		
-		wordsList[4][0] = "AMERICAN";
-		wordsList[4][1] = "citizen";
-		wordsList[4][2] = "USA";
-		wordsList[4][3] = "States";
-		wordsList[4][4] = "Canada";
-		wordsList[4][5] = "country";
-
-		int i = 0;
-		while (i < 5) {
-			System.out.println(wordsList[i][0].toString());
-			cv.put(DatabaseHelper.col1, wordsList[i][0]);
-			cv.put(DatabaseHelper.col2, wordsList[i][1]);
-			cv.put(DatabaseHelper.col3, wordsList[i][2]);
-			cv.put(DatabaseHelper.col4, wordsList[i][3]);
-			cv.put(DatabaseHelper.col5, wordsList[i][4]);
-			cv.put(DatabaseHelper.col6, wordsList[i][5]);
-			
-			System.out.println("FInished adding data to variables");
-			db.insert(DatabaseHelper.tableName, null, cv);
-			System.out.println("FInished inserting");
-			
-			i = i + 1;
-		}
+		Cursor cur = db.query("WordsTable", null,null,null, null, null, null, null); 
+		//prevent writing more than 125 words
+	    if(cur.getCount() < 125) {    	
+	    	cv.put(DatabaseHelper.col1, inputString[1]);	
+	    	cv.put(DatabaseHelper.col2, inputString[2]);
+	    	cv.put(DatabaseHelper.col3, inputString[3]);
+	    	cv.put(DatabaseHelper.col4, inputString[4]);
+	    	cv.put(DatabaseHelper.col5, inputString[5]);
+	    	cv.put(DatabaseHelper.col6, inputString[6]);
+	    
+	    	db.insert(DatabaseHelper.tableName, null, cv);
+	    	
+	    	db.close();
+	    }			
+	}
 		
 	
-	    db.close();
-	    System.out.println("About to exit frominsert");
-	}
+	    
+
 
 	public Cursor retrieveData(){
+		int min, max;
 		SQLiteDatabase db = this.getReadableDatabase();  
+		min=1;
+		max=125;
+		
+		Random r = new Random();
+		int randomNumber = r.nextInt(max - min + 1) + min;
+		System.out.println(randomNumber);
 	      
-	    Cursor cur = db.query("WordsTable", null,null,null, null, null, null, null); 
+	    Cursor cur = db.query("WordsTable", null, "_id in ("
+	            + randomNumber + ")",null,null, null, null, null); 
 	    if(cur == null) {
 	    	System.out.println("Null cursor returned");
 	    }
-	      System.out.println("created cursor");
 	      int rowsCount = cur.getCount();
-	      System.out.println("No of rows");
-	      System.out.println(rowsCount);  
 	      cur.moveToFirst();
 	   return cur;		
 	}
